@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import api from "../../services";
 import { IChildren } from "../usuario";
 import { ICliente } from "../../pages/home";
-import { number } from "yup";
 
 export interface IClienteContextProps {
     modalIsOpen: boolean

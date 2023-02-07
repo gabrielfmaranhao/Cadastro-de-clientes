@@ -1,7 +1,7 @@
 import { Header, ShowCase, Form} from "./style"
 import {AiOutlineMenu} from "react-icons/ai"
 import ButtonIcon from "../../components/ButtonIcon"
-import { useContext, useEffect, useState } from "react"
+import { useContext, useState } from "react"
 import Text from "../../components/Text"
 import Card from "../../components/Card"
 import { UserContext } from "../../contexts/usuario"
@@ -16,6 +16,7 @@ import { validationCliente, validationFunctions } from "../../validations"
 import { IFunctions } from "../../contexts/cliente"
 import Button from "../../components/Button"
 import { IAddClient } from "../../contexts/cliente"
+import { useNavigate } from "react-router-dom";
 export interface ICliente {
     id: string
     nome_completo: string
@@ -47,6 +48,7 @@ const Home = () => {
     const {register: registerClient, handleSubmit: handleSubmitClient, formState: {errors: errorsClient} } = useForm<IAddClient>({resolver: yupResolver(validationCliente)})
     const [value, setValue] = useState<string>()
     const [valueEmail, setValueEmail] = useState<string>()
+    const navigate = useNavigate()
     return(
         <>
             <Header>
@@ -55,7 +57,7 @@ const Home = () => {
                     <AiOutlineMenu size={20}/>
                 </ButtonIcon>
             </Header>
-            {user && 
+            {user ? 
                 <Form onSubmit={handleSubmitClient(createCliente)}>
                     <div className="form">
                         <Text color="green-1" element="h2" size={16} weight={700} description="Adicionar Clientes"/>
@@ -68,7 +70,7 @@ const Home = () => {
                         <Button title="Cadastrar" background="green-1" color="white-0" height={2.5} width={16}/>
                     </div>
                 </Form>
-            }
+            : <Button background="green-1" color="white-0" height={2.1} title="Logar" width={15} onClick={() => (localStorage.clear(), navigate("/login"))}/>}
             <ShowCase>
                 <ul>
                     {clientes.map((cliente) => <Card key={cliente.id} cliente={cliente}/>)}
