@@ -1,8 +1,15 @@
-
-
+import RoutesComponent from "./routes";
+import Global from "./styles/global";
+import { UserProvider } from "./contexts/usuario";
+import { ClienteProvider } from "./contexts/cliente";
 function App() {
   return (
-    <h1>App</h1>
+    <UserProvider>
+      <ClienteProvider>
+        <Global/>
+        <RoutesComponent/>
+      </ClienteProvider>
+    </UserProvider>
   );
 }
 

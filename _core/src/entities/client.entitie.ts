@@ -18,9 +18,9 @@ class Cliente {
     criado_por: string
     @ManyToOne(() => Usuario, (usuario) => usuario.clientes)
     usuario: Usuario
-    @OneToMany(() => Email, (email) => email.cliente)
+    @OneToMany(() => Email, (email) => email.cliente,{onDelete:"CASCADE"})
     emails: Email[]
-    @OneToMany(() => Telefone, (telefone) => telefone.cliente)
+    @OneToMany(() => Telefone, (telefone) => telefone.cliente, {onDelete:"CASCADE"})
     Telefones: Telefone[]
 }
 export default Cliente

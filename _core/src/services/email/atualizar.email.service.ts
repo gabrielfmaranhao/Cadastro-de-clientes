@@ -5,11 +5,11 @@ import { IEmailRequest } from "../../interfaces/cliente";
 
 export const atualizarEmailService = async (data: IEmailRequest, email_id: string):Promise<Email | void> => {
     const emailRepositorio = AppDataSource.getRepository(Email)
-    const procurarEmail = await emailRepositorio.findOneBy({email: email_id})
-    const procurarNovoEmail = await emailRepositorio.findOneBy({email: data.email})
+    const procurarEmail = await emailRepositorio.findOneBy({id: email_id})
     if(!procurarEmail) {
         throw new AppError("Email não cadastrado")
     }
+    const procurarNovoEmail = await emailRepositorio.findOneBy({email: data.email})
     if(procurarNovoEmail) {
         throw new AppError("Email já cadastrado")
     }

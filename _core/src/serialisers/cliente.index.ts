@@ -16,7 +16,5 @@ export const serializerCliente = yup.object().shape({
 })
 export const serializerClienteUpdate = yup.object().shape({
     nome_completo: yup.string().notRequired(),
-    cpf: yup.string().notRequired(),
-    telefone: serializerTelefone.notRequired(),
-    email: serializerEmail.notRequired()
+    cpf: yup.string().notRequired()
 })

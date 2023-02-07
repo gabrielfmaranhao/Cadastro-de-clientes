@@ -10,7 +10,7 @@ class Telefone {
     created_at: Date
     @UpdateDateColumn()
     updated_at: Date
-    @ManyToOne(() => Cliente, (cliente) => cliente.Telefones)
+    @ManyToOne(() => Cliente, (cliente) => cliente.Telefones ,{onDelete:"CASCADE"})
     cliente: Cliente
 }
 export default Telefone

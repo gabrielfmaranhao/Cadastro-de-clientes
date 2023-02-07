@@ -32,6 +32,7 @@ export const atualizarEmailController = async (request: Request, response: Respo
     try {
         const data = request.body
         const email_id = request.params.email_id
+        console.log(email_id)
         const email = await atualizarEmailService(data, email_id)
         return response.status(200).json(email)
     } catch (error) {

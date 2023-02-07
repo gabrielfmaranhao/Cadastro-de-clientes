@@ -22,7 +22,7 @@ export const verifyAuthTokenMiddleware = (req: Request, res: Response, next: Nex
         if(!user) {
             return res.status(401).json({message: "Usuário não exite"})
         }
-        req.user =  {user_id: user!.id}
+        req.user =  {user_id: user.id}
         return next()
     })
     

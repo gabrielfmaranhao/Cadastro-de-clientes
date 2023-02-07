@@ -3,8 +3,8 @@ import Cliente from "../../entities/client.entitie";
 import Usuario from "../../entities/user.entitie";
 import { AppError } from "../../errors";
 import { IClienteRequest } from "../../interfaces/cliente";
-import { createEmail } from "../email/criar.email.service";
-import { createTelefone } from "../telefone/criar.telefone.service";
+import { criarEmailService } from "../email/criar.email.service";
+import { criarTelefoneService } from "../telefone/criar.telefone.service";
 
 export const criarClienteService = async (data: IClienteRequest, user_id:string):Promise<Cliente> => {
     const usuarioRepositorio = AppDataSource.getRepository(Usuario)
@@ -20,7 +20,7 @@ export const criarClienteService = async (data: IClienteRequest, user_id:string)
 
     if(data.email) {
         try {
-            await createEmail(newCliente.id, data.email)  
+            await criarEmailService(newCliente.id, data.email)  
         } catch (error) {
             if(error instanceof AppError) {
                 console.log()
@@ -29,7 +29,7 @@ export const criarClienteService = async (data: IClienteRequest, user_id:string)
     }
     if(data.telefone) {
         try {
-             await createTelefone(newCliente.id, data.telefone)
+             await criarTelefoneService(newCliente.id, data.telefone)
         } catch (error) {
             if(error instanceof AppError) {
                 console.log()

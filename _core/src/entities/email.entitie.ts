@@ -10,7 +10,7 @@ class Email {
     created_at: Date
     @UpdateDateColumn()
     updated_at: Date
-    @ManyToOne(() => Cliente, (cliente) => cliente.emails )
+    @ManyToOne(() => Cliente, (cliente) => cliente.emails,{onDelete:"CASCADE"})
     cliente: Cliente
 }
 export default Email
