@@ -10,12 +10,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { validationLogin } from "../../validations";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/usuario";
+import { ILogin } from "../../interfaces";
 
 
-export interface ILogin {
-    username: string
-    password: string
-}
+
 
 
 const Login = () => {

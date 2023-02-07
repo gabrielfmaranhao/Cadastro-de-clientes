@@ -1,26 +1,9 @@
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../services";
-import { IRegister } from "../../pages/register";
-import { ILogin } from "../../pages/login";
+import { IUserContextProps, IChildren, IUser,  ILogin, IRegister} from "../../interfaces";
 
 
-export interface IChildren {
-    children: React.ReactNode   
-}
-export interface IUser {
-    id: string
-    username: string
-    cpf: string
-    created_at: string,
-	updated_at: string
-}
-export interface IUserContextProps {
-    registerUser: (user: IRegister) => Promise<void>
-    loginUser: (user: ILogin) => Promise<void>
-    logout: () => void
-    user: IUser | undefined
-}
 
 export const UserContext = createContext<IUserContextProps>({} as IUserContextProps)
 export const UserProvider = ({children}:IChildren) => {

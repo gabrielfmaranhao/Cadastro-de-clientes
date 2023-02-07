@@ -1,9 +1,6 @@
 import styled from "styled-components";
+import { IButtonPropsStyle } from "../../interfaces";
 
-interface IButtonPropsStyle {
-    top: number
-    right: number
-}
 
 export const Button = styled.button`
     background: none;

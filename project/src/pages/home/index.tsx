@@ -13,33 +13,10 @@ import {BsTrash2} from "react-icons/bs";
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { validationCliente, validationFunctions } from "../../validations"
-import { IFunctions } from "../../contexts/cliente"
 import Button from "../../components/Button"
-import { IAddClient } from "../../contexts/cliente"
 import { useNavigate } from "react-router-dom";
-export interface ICliente {
-    id: string
-    nome_completo: string
-    criado_por: string
-    created_at: string
-    updated_at: string
-    cpf: string
-    Telefones: ITelefone[]
-    emails: IEmail[]
-}
-export interface ITelefone {
-    id:string
-    created_at: Date
-    updated_at: Date
-    telefone: string
+import { IAddClient, IFunctions } from "../../interfaces"
 
-}
-export interface IEmail {
-    id: string
-    created_at: Date
-    updated_at: Date
-    email: string
-}
 
 const Home = () => {
     const {clientes, modalIsOpen, clientModal, functions, alterNumber, alterEmail, deleteEmail, deleteNumber, createCliente} = useContext(ClientContext)
@@ -67,10 +44,10 @@ const Home = () => {
                         <Text description={errorsClient.cpf?.message} color="red-0" element="span" size={11} weight={700}/>
                         <Fields description="Telefone:" color="green-1" html="telefone" size={12} weight={400} border_color={errorsClient.telefone ? "red-0" : "green-1"} outline={errors.new_number ? "red-0" : "green-1"} register={{...registerClient("telefone")}} placeholder = "dd+123456789"/>
                         <Fields description="Email" color="green-1" html="email" size={12} weight={400} border_color={errorsClient.email ? "red-0" : "green-1"} outline={errors.new_number ? "red-0" : "green-1"} register={{...registerClient("email")}} placeholder = "jonhnDowe@mail.com"/>
-                        <Button title="Cadastrar" background="green-1" color="white-0" height={2.5} width={16}/>
+                        <Button title="Cadastrar" background="green-1" color="white-0" height={2.5}/>
                     </div>
                 </Form>
-            : <Button background="green-1" color="white-0" height={2.1} title="Logar" width={15} onClick={() => (localStorage.clear(), navigate("/login"))}/>}
+            : <Button background="green-1" color="white-0" height={2.1} title="Logar" width={15} onClick={() => (localStorage.clear() , navigate("/login"))}/>}
             <ShowCase>
                 <ul>
                     {clientes.map((cliente) => <Card key={cliente.id} cliente={cliente}/>)}

@@ -1,6 +1,6 @@
 import { useRef, useEffect, useContext } from "react"
 import { ClientContext } from "../../contexts/cliente"
-import { IChildren } from "../../contexts/usuario"
+import { IChildren } from "../../interfaces"
 import { Container } from "./style"
 
 

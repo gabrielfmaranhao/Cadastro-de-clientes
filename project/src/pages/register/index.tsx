@@ -10,13 +10,9 @@ import { validationRegister } from "../../validations";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/usuario";
+import { IRegister } from "../../interfaces";
 
-export interface IRegister {
-    username: string
-    password: string
-    confirm_password: string
-    cpf: string
-}
+
 
 const Register = () => {
     const {register, handleSubmit, formState:{errors} } = useForm<IRegister>({resolver: yupResolver(validationRegister)})

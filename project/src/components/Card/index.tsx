@@ -1,4 +1,3 @@
-import { ICliente } from "../../pages/home"
 import { CardStyle } from "./style"
 import Text from "../Text"
 import { useContext } from "react"
@@ -6,10 +5,9 @@ import { UserContext } from "../../contexts/usuario"
 import ButtonIcon from "../ButtonIcon"
 import {HiInformationCircle} from "react-icons/hi";
 import { ClientContext } from "../../contexts/cliente"
+import { ICardProps } from "../../interfaces"
 
-interface ICardProps {
-    cliente: ICliente
-}
+
 
 const Card = ({cliente}:ICardProps) => {
     const date_cliente = cliente.created_at.slice(0,10).split("-").reverse().join("/")
