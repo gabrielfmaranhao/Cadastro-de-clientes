@@ -17,7 +17,6 @@ import Button from "../../components/Button"
 import { useNavigate } from "react-router-dom";
 import { IAddClient, IFunctions } from "../../interfaces"
 
-
 const Home = () => {
     const {clientes, modalIsOpen, clientModal, functions, alterNumber, alterEmail, deleteEmail, deleteNumber, createCliente, setModalIsOpen} = useContext(ClientContext)
     const { user} =useContext(UserContext)
@@ -26,7 +25,6 @@ const Home = () => {
     const [value, setValue] = useState<string>()
     const [valueEmail, setValueEmail] = useState<string>()
     const navigate = useNavigate()
-    console.log(errorsClient)
     return(
         <>
             <Header>

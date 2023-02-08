@@ -5,6 +5,5 @@ const api = axios.create({
     headers: {
         Authorization: `Bearer ${token}`
     },
-    timeout: 3000
 })
 export default api

@@ -5,6 +5,7 @@ import { IUserContextProps, IChildren, IUser,  ILogin, IRegister} from "../../in
 
 
 
+
 export const UserContext = createContext<IUserContextProps>({} as IUserContextProps)
 export const UserProvider = ({children}:IChildren) => {
     const [user, setUser] = useState<IUser | undefined>();
@@ -36,6 +37,8 @@ export const UserProvider = ({children}:IChildren) => {
         try {
             const {data} = await api.post("/user/login/", user)
             localStorage.setItem("@Cadastro_clientes: token", data.access)
+            const {data: data2} = await api.get("/user/profile/",{headers:{Authorization: `Bearer ${data.access}`}})
+            setUser(data2)
             navigate("/")
         } catch (error) {
             console.log(error)
@@ -46,7 +49,7 @@ export const UserProvider = ({children}:IChildren) => {
         setUser(undefined)
     }
     return(
-        <UserContext.Provider value={ { loginUser, logout, registerUser, user } }>
+        <UserContext.Provider value={ { loginUser, logout, registerUser, user, setUser } }>
             {children}
         </UserContext.Provider>
     )

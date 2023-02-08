@@ -104,6 +104,7 @@ export interface IUserContextProps {
     loginUser: (user: ILogin) => Promise<void>
     logout: () => void
     user: IUser | undefined
+    setUser: React.Dispatch<React.SetStateAction<IUser | undefined>>
 }
 export interface ICliente {
     id: string
