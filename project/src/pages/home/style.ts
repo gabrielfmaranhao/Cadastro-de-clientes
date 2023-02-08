@@ -18,7 +18,10 @@ export const ShowCase = styled.main`
     ul {
         display: flex;
         flex-direction: column;
+        align-items: center;
         gap: 10px;
+        width: 80%;
+        max-width: 30rem;
     }
 `
 export const Form = styled.form`

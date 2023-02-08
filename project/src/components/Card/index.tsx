@@ -4,6 +4,7 @@ import { useContext } from "react"
 import { UserContext } from "../../contexts/usuario"
 import ButtonIcon from "../ButtonIcon"
 import {HiInformationCircle} from "react-icons/hi";
+import {IoMdTrash} from "react-icons/io";
 import { ClientContext } from "../../contexts/cliente"
 import { ICardProps } from "../../interfaces"
 
@@ -12,7 +13,7 @@ import { ICardProps } from "../../interfaces"
 const Card = ({cliente}:ICardProps) => {
     const date_cliente = cliente.created_at.slice(0,10).split("-").reverse().join("/")
     const {user} = useContext(UserContext)
-    const {setModalIsOpen, modalIsOpen, setClientModal} = useContext(ClientContext)
+    const {setModalIsOpen, modalIsOpen, setClientModal, deleteCliente} = useContext(ClientContext)
     return(
         <CardStyle >
             <div className="simples">
@@ -21,12 +22,19 @@ const Card = ({cliente}:ICardProps) => {
                 <Text element="span" color="gray-0" size={12} weight={400} description={date_cliente}/>
             </div>
             {user?.username === cliente.criado_por && 
-            <ButtonIcon top={5} right={10} onClick={() => { 
-                setModalIsOpen(!modalIsOpen) 
-                setClientModal(cliente) 
-                }}>
-                <HiInformationCircle color="var(--green-1)"/>
-            </ButtonIcon>}
+            <>
+                <ButtonIcon top={5} right={30} onClick={() => deleteCliente(cliente.id)}>
+                    <IoMdTrash color="var(--red-0)"/>
+                </ButtonIcon>
+                <ButtonIcon top={5} right={10} onClick={() => { 
+                    setModalIsOpen(!modalIsOpen) 
+                    setClientModal(cliente) 
+                    }}>
+                    <HiInformationCircle color="var(--green-1)"/>
+                </ButtonIcon>
+            </>
+                }
+            
         </CardStyle>
     )
     

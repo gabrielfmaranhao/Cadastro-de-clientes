@@ -67,6 +67,7 @@ export interface IClienteContextProps {
     deleteEmail: (id_email: string) => Promise<void>
     deleteNumber: (id_telefone: string) => Promise<void>
     createCliente: (user: IAddClient) => Promise<void>
+    deleteCliente: (cliente_id: string) => Promise<void>
 }
 export interface IFunctions {
     alter_cpf: string

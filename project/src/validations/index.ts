@@ -39,13 +39,17 @@ export const validationFunctions = yup.object().shape({
 export const validationCliente = yup.object().shape({
     nome_completo : yup.string().required("Campo obrigatório"),
     cpf: yup.string().required("Campo obrigatório"),
-    telefone: yup.string().notRequired().max(15).transform((value) => {
+    telefone: yup.string().notRequired().max(15).transform((value) => { 
+        if(value.length === 0){
+            return undefined
+        }
         const part1 = value.slice(0,2)
         let ddd = `(${part1})`
         const part2 = value.slice(2,7)
         let primeiro = ` ${part2}-`
         const part3 = value.slice(7)
         return ddd+primeiro+part3
+         
     }),
-    email: yup.string().notRequired()
+    email: yup.string().notRequired().transform( (value:string) => value.length === 0 ? undefined : value )
 })

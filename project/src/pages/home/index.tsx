@@ -19,13 +19,14 @@ import { IAddClient, IFunctions } from "../../interfaces"
 
 
 const Home = () => {
-    const {clientes, modalIsOpen, clientModal, functions, alterNumber, alterEmail, deleteEmail, deleteNumber, createCliente} = useContext(ClientContext)
+    const {clientes, modalIsOpen, clientModal, functions, alterNumber, alterEmail, deleteEmail, deleteNumber, createCliente, setModalIsOpen} = useContext(ClientContext)
     const { user} =useContext(UserContext)
     const {register, handleSubmit, formState: {errors}} = useForm<IFunctions>({resolver: yupResolver(validationFunctions)})
     const {register: registerClient, handleSubmit: handleSubmitClient, formState: {errors: errorsClient} } = useForm<IAddClient>({resolver: yupResolver(validationCliente)})
     const [value, setValue] = useState<string>()
     const [valueEmail, setValueEmail] = useState<string>()
     const navigate = useNavigate()
+    console.log(errorsClient)
     return(
         <>
             <Header>
@@ -57,7 +58,7 @@ const Home = () => {
                 <Modal>
                     <form onSubmit={handleSubmit(functions)}>
                         <Text description={clientModal.nome_completo} color="green-1" element="h2" size={20} weight={700} />
-                        <ButtonIcon top={5} right={0} >
+                        <ButtonIcon top={5} right={0} onClick={() => setModalIsOpen(!modalIsOpen)}>
                             <GrClose/>
                         </ButtonIcon>
                         <div className="position">

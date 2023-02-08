@@ -40,6 +40,15 @@ export const ClienteProvider = ({children}: IChildren) => {
             console.log(error)
         }
     }
+    const deleteCliente = async (cliente_id: string) => {
+        try{
+            await api.delete(`/cliente/${cliente_id}/`)
+            const {data} = await api.get("/cliente/");
+            setClientes(data)
+        }catch (error){
+            console.log(error)
+        }
+    }
     const alterCpf = async(dados:string, id: string):Promise<void> => {
         const cpf = {cpf: dados}
         try {
@@ -126,7 +135,7 @@ export const ClienteProvider = ({children}: IChildren) => {
         }
     }
     return(
-        <ClientContext.Provider value={ {clientes, modalIsOpen, setModalIsOpen, clientModal, setClientModal, functions, alterNumber, alterEmail, deleteEmail, deleteNumber, createCliente} }>
+        <ClientContext.Provider value={ {clientes, modalIsOpen, setModalIsOpen, clientModal, setClientModal, functions, alterNumber, alterEmail, deleteEmail, deleteNumber, createCliente, deleteCliente} }>
             {children}
         </ClientContext.Provider>
     )

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 
 export const CardStyle = styled.li`
-    width: 20rem;
+    width: 100%;
     background: var(--white-0);
     border-radius: 8px;
     display: flex;
