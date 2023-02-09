@@ -1,0 +1,453 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de cadastro de clientes",
+        "description": "Essa API tem como objetivo realizar o cadastro de clientes e salva-los em um banco de dados relacional.",
+        "contact": {
+            "name": "API Suport",
+            "url": "https://github.com/gabrielfmaranhao",
+            "email": "gabrielmaranhao48@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3001/api",
+            "description": "API de Test"
+        }
+    ],
+    "paths": {
+        "/user/login/": {
+            "post": {
+                "summary": "Login de usuário",
+                "description": "Essa rota será responsável para logar um usuário",
+                "tags": ["Usuário"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties":{
+                                    "username":{"type":"string"},
+                                    "password":{"type":"string"}
+                                }
+                            },
+                            "examples": {
+                                "usuario":{
+                                    "value": {
+                                        "username":"JhonDoe",
+                                        "password": "jhondoe2019"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400":{
+                        "description": "Usuário ou senha incorretos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties":{
+                                        "message":{"type":"string"}
+                                    }
+                                },
+                                "example":{
+                                    "message":"Usuário ou senha incorretos"
+                                }
+                            }
+                        }
+                    },
+                    "200":{
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties":{
+                                        "acess":{"type":"string"}
+                                    }
+                                },
+                                "example":{
+                                    "acess":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmFjZTI1ZWUtZThiOS00OWZiLTk4OTYtYQzNjA0NGNjIiwiaWF0IjoxNjc1ODcwMzIxLCJleHAiOjE2NzU5NTY3MjEsInN1YiI6ImZhY2UyNWVlLWU4YjktNDlmYi05ODk2LWM5MDQ0MzYwNDRjYyJ9.EE_6Dq-4XvVqroE4qau5ZSV-QQE0OB10Ax8vCX3EA2s"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/register/": {
+            "post":{
+                "summary": "Registro de usuário",
+                "description": "Essa rota é responsável por registrar um usuário",
+                "tags": ["Usuário"],
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema": {
+                                "Usuário":{
+                                    "type":"object",
+                                    "properties":{
+                                    "username":{"type":"string"},
+                                    "password":{"type":"string"},
+                                    "cpf":{"type":"string"}
+                                     }                         
+                                }
+                                                                   
+                            },
+                            "examples":{
+                                "usuario": {
+                                    "value": {
+                                        "username": "JhonDoe",
+                                        "password": "jhondoe2019",
+                                        "cpf": "10987456123"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "201":{
+                        "description": "Created",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/Usuário"
+                                },
+                                "example":{
+                                    "id": "sçdl,açsldmvaslkdfmãdsmfasçldmflkasdnflaskdn",
+                                    "username":"JhonDoe",
+                                    "password":"jhondoe2019",
+                                    "created_at": "2023-02-06T05:08:21.700Z",
+	                                "updated_at": "2023-02-06T05:08:21.700Z"
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description":"Usuário ou cpf já cadastrados",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties": {
+                                        "message": {"type": "string"}
+                                    }
+                                },
+                                "examples":{
+                                    "cpf":{
+                                        "value":{
+                                            "message":"Cpf já cadastrado"
+                                    }
+                                },
+                                "username":{
+                                    "value":{
+                                        "message":"Username já cadastrado"
+                                    }
+                                }                                    
+                                
+                            }
+                            
+                        }
+                        
+                    }
+
+                    
+                }
+                
+            }
+
+            
+            }        
+         },
+         "/user/profile/":{
+            "get":{
+                "summary":"Get de usuário pelo Token",
+                "description":"Essa Rota tem como objetivo retornar o usuário pelo token",
+                "tags":["Usuário"],
+                "security":[{"bearerAuth": []}],
+                "parameters":[
+                    {
+                        "name":"Token",
+                        "in":"header",
+                        "description":"Authorization bearer token",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description": "Retorna o usuário",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/Usuário"
+                                }
+                            }
+                        }
+                    },
+                    "401":{
+                        "description":"Token inválido",
+                        "content":{
+                            "application/json":{
+                                "example":{
+                                    "message":"Token inválido"
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+         },
+         "/cliente/":{
+            "post":{
+                "description":"Rota com o intuito de Criar um cliente",
+                "summary":"Create Cliente ",
+                "tags":["Cliente"],
+                "security":[{"bearerAuth": []}],
+                "parameters":[
+                    {
+                        "name":"Token",
+                        "in":"header",
+                        "description":"Authorization bearer token",
+                        "required":true,
+                        "type":"string"
+                        
+                    },
+                    {
+                        "name": "nome_completo",
+                        "in": "body",
+                        "description": "Nome completo do cliente",
+                        "required":true,
+                        "type":"string",
+                        "example": "nome_completo: John Doe"
+                    },
+                    {
+                        "name": "cpf",
+                        "in": "body",
+                        "description": "OBS: Exatamente 11 caracteres.",
+                        "required":true,
+                        "type":"string",
+                        "example": "cpf : 123345678910"
+                    },
+                    {
+                        "name": "telefone",
+                        "in": "body",
+                        "description": "Telefone do cliente",
+                        "required":false,
+                        "type":"object",
+                        "example": "telefone : {number:(00) 00000-0000}"   
+                    },
+                    {
+                        "name": "email",
+                        "in": "body",
+                        "description": "email do cliente",
+                        "required":false,
+                        "type":"object",
+                        "example": "email : {email: johndoe2019@mail.com}"   
+                    }
+                ],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "properties":{
+                                    "cpf":{"type":"string"}
+                                }
+                            },
+                            "examples":{
+                                "Cliente sem telefone e sem email":{
+                                    "value":{
+                                        "nome_completo":"Jonh Doe",
+                                        "cpf":"12345678910"
+                                    }
+                                },
+                                "Cliente com telefone e com email":{
+                                    "value":{
+                                        "nome_completo":"Jonh Doe",
+                                        "cpf":"12345678910",
+                                        "telefone":{"number":"(00) 00000-0000"},
+                                        "email":{"email":"JohnDoe@email.com"}
+                                    }
+                                },
+                                "Cliente com telefone e sem email":{
+                                    "value":{
+                                        "nome_completo":"Jonh Doe",
+                                        "cpf":"12345678910",
+                                        "telefone":{"number":"(00) 00000-0000"}
+                                    }
+                                },
+                                "Cliente com email e sem telefone":{
+                                    "value":{
+                                    "nome_completo":"Jonh Doe",
+                                    "cpf":"12345678910",
+                                    "email":{"email":"JohnDoe@email.com"}
+                                    } 
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description":"Cliente Criado",
+                        "content":{
+                            "application/json":{
+                                "examples":{
+                                    "Cliente com telefone e com email":{
+                                        "value":{
+                                        "id":"sçdl,açsldmvaslkdfmãdsmfasçldmflkasdnflaskdn",
+                                        "nome_completo":"Jonh Doe",
+                                        "cpf":"12345678910",
+                                        "created_at": "2023-02-08T01:48:14.945Z",
+	                                    "updated_at": "2023-02-08T01:48:14.945Z",
+	                                    "criado_por": "johndoe2019",
+                                        "telefone":[
+                                            {
+                                                "id":"00000dsedasfasdfas",
+                                                "telefone":"(00) 00000-0000",
+                                                "created_at": "2023-02-08T01:48:14.945Z",
+	                                            "updated_at": "2023-02-08T01:48:14.945Z"
+                                            }
+                                        ],
+                                        "email":[{
+                                            "id":"0dfassedasfasdfas",
+                                            "email":"JohnDoe@email.com",
+                                            "created_at": "2023-02-08T01:48:14.945Z",
+                                            "updated_at": "2023-02-08T01:48:14.945Z"
+                                        }]
+                                        }
+                                        
+                                    },
+                                    "Cliente com email e sem telefone":{
+                                        "value":{
+                                            "id":"sçdl,açsldmvaslkdfmãdsmfasçldmflkasdnflaskdn",
+                                        "nome_completo":"Jonh Doe",
+                                        "cpf":"12345678910",
+                                        "created_at": "2023-02-08T01:48:14.945Z",
+	                                    "updated_at": "2023-02-08T01:48:14.945Z",
+	                                    "criado_por": "johndoe2019",
+                                        "email":[{
+                                            "id":"0dfassedasfasdfas",
+                                            "email":"JohnDoe@email.com",
+                                            "created_at": "2023-02-08T01:48:14.945Z",
+                                            "updated_at": "2023-02-08T01:48:14.945Z"
+                                        }]
+                                        }
+                                    },
+                                    "Cliente com telefone e sem email":{
+                                        "value":{
+                                            "id":"sçdl,açsldmvaslkdfmãdsmfasçldmflkasdnflaskdn",
+                                        "nome_completo":"Jonh Doe",
+                                        "cpf":"12345678910",
+                                        "created_at": "2023-02-08T01:48:14.945Z",
+	                                    "updated_at": "2023-02-08T01:48:14.945Z",
+	                                    "criado_por": "johndoe2019",
+                                        "telefone":[
+                                            {
+                                                "id":"00000dsedasfasdfas",
+                                                "telefone":"(00) 00000-0000",
+                                                "created_at": "2023-02-08T01:48:14.945Z",
+	                                            "updated_at": "2023-02-08T01:48:14.945Z"
+                                            }
+                                        ]
+                                        }
+                                    },
+                                    "Cliente sem telefone e sem email":{
+                                        "value":{
+                                        "id":"sçdl,açsldmvaslkdfmãdsmfasçldmflkasdnflaskdn",
+                                        "nome_completo":"Jonh Doe",
+                                        "cpf":"12345678910",
+                                        "created_at": "2023-02-08T01:48:14.945Z",
+	                                    "updated_at": "2023-02-08T01:48:14.945Z",
+	                                    "criado_por": "johndoe2019",
+                                        "telefone":[],
+                                        "email":[]
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                    },"400":{
+                        "description":"Cpf já cadastrado",
+                        "content":{
+                            "application/json":{
+                                "example":{
+                                    "message":"Cpf já cadastrado"
+                                }
+                            }
+                        }
+                    },"401":{
+                        "description":"Token inválido",
+                        "content":{
+                            "application/json":{
+                                "example":{
+                                    "message":"Token inválido ou não exite."
+                                }
+                            }
+                        }
+                    }
+                }
+
+            },
+            "get":{
+                "description": "Rota retorna todas os clientes cadastrados.",
+                "summary": " Tem como objetivo retornar todos os clientes cadastrados.",
+                "tags":["Cliente"],
+                "responses":{
+                    "200":{
+                        "description":"Todos os clientes cadastrados",
+                        "content":{
+                            "application/json":{
+                                "schema":{                                   
+                                    "items":{
+                                        "$ref":"#/components/schemas/Cliente"
+                                    }
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+         }
+},
+    "components":{
+        "schemas": {
+            "Usuário":{
+                "type":"object",
+                "properties":{
+                    "id":{"type":"string"},
+                    "username":{"type":"string"},
+                    "password":{"type":"string"},
+                    "cpf":{"type":"string"},
+                    "created_at":{"type":"string"},
+                    "updated_at":{"type":"string"}
+                }
+            },
+            "Cliente":{
+                "type":"object",
+                "properties":{
+                    "id":{"type":"string"},
+                    "nome_completo":{"type":"string"},
+                    "cpf":{"type":"string"},
+                    "created_at": {"type":"string"},
+	                "updated_at": {"type":"string"},
+	                "criado_por": {"type":"string"},
+                    "telefone":{"type":"[]"},
+                    "email":{"type":"[]"}
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}
