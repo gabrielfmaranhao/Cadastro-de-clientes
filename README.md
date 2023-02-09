@@ -10,3 +10,5 @@ Aplicação fullstack que visa, registrar clientes e criar um relatório baseado
   <li>Entrar no diretório do projeto e soltar um comando yarn start</li>
   <strong> Feito isso já pode começar a cadastrar os clientes.</strong>
 </ol>
+<h3>Link da doc:</h3>
+<strong>https//localhost:3001/api/doc/</strong>
