@@ -16,44 +16,32 @@ import { validationCliente, validationFunctions } from "../../validations"
 import Button from "../../components/Button"
 import { useNavigate } from "react-router-dom";
 import { IAddClient, IFunctions } from "../../interfaces"
+import NavBar from "../../components/NavBar"
+import { FormClient } from "../../components/FormClient"
 
 const Home = () => {
     const {clientes, modalIsOpen, clientModal, functions, alterNumber, alterEmail, deleteEmail, deleteNumber, createCliente, setModalIsOpen} = useContext(ClientContext)
-    const { user} =useContext(UserContext)
+    const { user,  navOpen, setNavOpen, formClient, setFormClient} =useContext(UserContext)
     const {register, handleSubmit, formState: {errors}} = useForm<IFunctions>({resolver: yupResolver(validationFunctions)})
     const {register: registerClient, handleSubmit: handleSubmitClient, formState: {errors: errorsClient} } = useForm<IAddClient>({resolver: yupResolver(validationCliente)})
     const [value, setValue] = useState<string>()
     const [valueEmail, setValueEmail] = useState<string>()
-    const navigate = useNavigate()
     return(
         <>
             <Header>
                 <h1>Cadastro de clientes</h1>
-                <ButtonIcon right={10} top={5}>
+                <ButtonIcon right={10} top={5} onClick={() => setNavOpen(!navOpen)}>
                     <AiOutlineMenu size={20}/>
                 </ButtonIcon>
             </Header>
-            {user ? 
-                <Form onSubmit={handleSubmitClient(createCliente)}>
-                    <div className="form">
-                        <Text color="green-1" element="h2" size={16} weight={700} description="Adicionar Clientes"/>
-                        <Fields description="Nome completo:" color="green-1" html="nome_completo" size={12} weight={400} border_color={errorsClient.nome_completo ? "red-0" : "green-1"} outline={errorsClient.nome_completo  ? "red-0" : "green-1"} register={{...registerClient("nome_completo")}} placeholder="Ex: Gabriel Ferreira Maranhão"/>
-                        <Text description={errorsClient.nome_completo?.message} color="red-0" element="span" size={11} weight={700}/>
-                        <Fields description="CPF:" color="green-1" html="cpf" size={12} weight={400} border_color={errorsClient.cpf ? "red-0" : "green-1"} outline={errorsClient.cpf ? "red-0" : "green-1"} placeholder="Ex: 12345678910" register={{...registerClient("cpf")}}/>
-                        <Text description={errorsClient.cpf?.message} color="red-0" element="span" size={11} weight={700}/>
-                        <Fields description="Telefone:" color="green-1" html="telefone" size={12} weight={400} border_color={errorsClient.telefone ? "red-0" : "green-1"} outline={errors.new_number ? "red-0" : "green-1"} register={{...registerClient("telefone")}} placeholder = "dd+123456789"/>
-                        <Fields description="Email" color="green-1" html="email" size={12} weight={400} border_color={errorsClient.email ? "red-0" : "green-1"} outline={errors.new_number ? "red-0" : "green-1"} register={{...registerClient("email")}} placeholder = "jonhnDowe@mail.com"/>
-                        <Button title="Cadastrar" background="green-1" color="white-0" height={2.5}/>
-                    </div>
-                </Form>
-            : <Button background="green-1" color="white-0" height={2.1} title="Logar" width={15} onClick={() => (localStorage.clear() , navigate("/login"))}/>}
+            {navOpen && <NavBar/>}
             <ShowCase>
                 <ul>
                     {clientes.map((cliente) => <Card key={cliente.id} cliente={cliente}/>)}
                 </ul>
             </ShowCase>
             {modalIsOpen && 
-                <Modal>
+                <Modal modalIsOpen setModalIsOpen={setModalIsOpen}>
                     <form onSubmit={handleSubmit(functions)}>
                         <Text description={clientModal.nome_completo} color="green-1" element="h2" size={20} weight={700} />
                         <ButtonIcon top={5} right={0} onClick={() => setModalIsOpen(!modalIsOpen)}>
@@ -113,6 +101,11 @@ const Home = () => {
                         </div>                
                         )}
                     </form>
+                </Modal>
+            }
+            {formClient &&
+                <Modal modalIsOpen={formClient} setModalIsOpen={setFormClient}>
+                    <FormClient/>
                 </Modal>
             }
         </>

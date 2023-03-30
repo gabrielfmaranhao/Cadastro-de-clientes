@@ -105,6 +105,11 @@ export interface IUserContextProps {
     logout: () => void
     user: IUser | undefined
     setUser: React.Dispatch<React.SetStateAction<IUser | undefined>>
+    navOpen: boolean
+    setNavOpen: React.Dispatch<React.SetStateAction<boolean>>
+    formClient: boolean
+    setFormClient: React.Dispatch<React.SetStateAction<boolean>>
+    
 }
 export interface ICliente {
     id: string

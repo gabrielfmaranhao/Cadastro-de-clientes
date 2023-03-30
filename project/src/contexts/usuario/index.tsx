@@ -9,6 +9,8 @@ import { IUserContextProps, IChildren, IUser,  ILogin, IRegister} from "../../in
 export const UserContext = createContext<IUserContextProps>({} as IUserContextProps)
 export const UserProvider = ({children}:IChildren) => {
     const [user, setUser] = useState<IUser | undefined>();
+    const [navOpen, setNavOpen] = useState<boolean>(false);
+    const [formClient, setFormClient] = useState<boolean>(false);
     const navigate = useNavigate()
     useEffect( () => {
         const loadUser = async () => {
@@ -49,7 +51,7 @@ export const UserProvider = ({children}:IChildren) => {
         setUser(undefined)
     }
     return(
-        <UserContext.Provider value={ { loginUser, logout, registerUser, user, setUser } }>
+        <UserContext.Provider value={ { loginUser, logout, registerUser, user, setUser, navOpen, setNavOpen,formClient, setFormClient } }>
             {children}
         </UserContext.Provider>
     )
