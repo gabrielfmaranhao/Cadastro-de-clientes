@@ -1,14 +1,32 @@
-# Cadastro-de-clientes
-Aplicação fullstack que visa, registrar clientes e criar um relatório baseado nos dados recebidos.
-<h3>Passo à passo:</h3>
+<h1>Cadastro de clientes</h1>
+<p>
+  Esta é uma aplicação Full-Stack desenvolvida com Node.js e React para      gerenciamento de clientes.
+</p>
+<h3>Funcionalidades</h3>
+<ul>
+  <li>Cadastro de Funcionário</li>
+  <li>Cadastro de Clientes</li>
+  <li>Visualização de Clientes cadastrados</li>
+  <li>Edição de clientes cadastrados</li>
+  <li>Exclusão de Clientes cadastrados</li>
+</ul>
+<h3>Tecnologias Utilizadas</h3>
+<ul>
+  <li>Node.ts</li>
+  <li>Express</li>
+  <li>PostgreSQL</li>
+  <li>React.ts</li>
+  <li>CSS</li>
+  <li>HTML</li>
+  <li>TypeScript</li>
+</ul>
+<h3>Instalação</h3>
 <ol>
-  <li>Clonar o repositório</li>
-  <li>Entrar na pasta projeto, e entrar na pasta _core</li>
-  <li>No terminal de cada uma das pastas soltar o comando "yarn" para instalar as dependências do projeto</li>
-  <li>No diretório _core criar um arquico .env usando o modelo do .env.example</li>
-  <li>Soltar um comando yarn dev para rodar o servidor</li>
-  <li>Entrar no diretório do projeto e soltar um comando yarn start</li>
-  <strong> Feito isso já pode começar a cadastrar os clientes.</strong>
+  <li>
+      Clone o repositório
+  </li>
+  ```
+  git clone https://github.com/gabrielfmaranhao/Cadastro-de-clientes.git
+  ```
+  
 </ol>
-<h3>Link da doc:</h3>
-<strong>https//localhost:3001/api/doc/</strong>
