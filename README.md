@@ -23,10 +23,14 @@
 <h3>Instalação</h3>
 <ol>
   <li>
-      Clone o repositório
+      Clone o repositório<code>git clone https://github.com/gabrielfmaranhao/Cadastro-de-clientes.git</code>
   </li>
-  ```
-  git clone https://github.com/gabrielfmaranhao/Cadastro-de-clientes.git
-  ```
+  <li>
+    Entre nos arquivos _core e project e instale as depedencias com o <code>yarn</code>
+  </li>
+  <li>
+    Entre no arquivo _core e crie suas variáveis de dependencia de acordo com o arquivo .env.example.
+  </li>
   
 </ol>
+
