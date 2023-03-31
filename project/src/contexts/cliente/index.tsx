@@ -31,7 +31,6 @@ export const ClienteProvider = ({children}: IChildren) => {
             const emailNew = {email: email}
             user["email"] = emailNew
         }
-        console.log(user)
         try {
             await api.post("/cliente/", user)
             const {data} = await api.get("/cliente/");
