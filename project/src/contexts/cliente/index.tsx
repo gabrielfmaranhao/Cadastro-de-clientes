@@ -1,6 +1,8 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import api from "../../services";
 import { IClienteContextProps, IAddClient, ITelefoneAdd, IEmailAdd, IFunctions, IChildren, ICliente } from "../../interfaces";
+import { toast } from "react-toastify";
+import { AxiosError } from "axios";
 
 
 
@@ -8,6 +10,7 @@ import { IClienteContextProps, IAddClient, ITelefoneAdd, IEmailAdd, IFunctions, 
 export const ClientContext = createContext<IClienteContextProps>({} as IClienteContextProps);
 export const ClienteProvider = ({children}: IChildren) => {
     const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
+    const [formClient, setFormClient] = useState<boolean>(false);
     const [clientModal, setClientModal] = useState<ICliente>({} as ICliente)
     const [ clientes, setClientes] = useState<ICliente[]>([])
     useEffect(() => {
@@ -35,7 +38,12 @@ export const ClienteProvider = ({children}: IChildren) => {
             await api.post("/cliente/", user)
             const {data} = await api.get("/cliente/");
             setClientes(data)
+            toast.success("Cliente Criado")
+            setFormClient(false)
         } catch (error) {
+            if(error instanceof AxiosError) {
+                toast.error(error.response?.data.message)
+            }
             console.log(error)
         }
     }
@@ -134,7 +142,7 @@ export const ClienteProvider = ({children}: IChildren) => {
         }
     }
     return(
-        <ClientContext.Provider value={ {clientes, modalIsOpen, setModalIsOpen, clientModal, setClientModal, functions, alterNumber, alterEmail, deleteEmail, deleteNumber, createCliente, deleteCliente} }>
+        <ClientContext.Provider value={ {clientes, modalIsOpen, setModalIsOpen, clientModal, setClientModal, functions, alterNumber, alterEmail, deleteEmail, deleteNumber, createCliente, deleteCliente, formClient, setFormClient} }>
             {children}
         </ClientContext.Provider>
     )

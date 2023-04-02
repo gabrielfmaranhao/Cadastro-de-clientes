@@ -2,6 +2,8 @@ import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../services";
 import { IUserContextProps, IChildren, IUser,  ILogin, IRegister} from "../../interfaces";
+import { toast } from "react-toastify";
+import { AxiosError } from "axios";
 
 
 
@@ -10,7 +12,6 @@ export const UserContext = createContext<IUserContextProps>({} as IUserContextPr
 export const UserProvider = ({children}:IChildren) => {
     const [user, setUser] = useState<IUser | undefined>();
     const [navOpen, setNavOpen] = useState<boolean>(false);
-    const [formClient, setFormClient] = useState<boolean>(false);
     const navigate = useNavigate()
     useEffect( () => {
         const loadUser = async () => {
@@ -30,8 +31,12 @@ export const UserProvider = ({children}:IChildren) => {
     const registerUser = async (user:IRegister):Promise<void> => {
         try {
             await api.post("/user/register/", user)
+            toast.success("Usuário Criado")
             navigate("/login")
         } catch (error) {
+            if( error instanceof AxiosError){
+                toast.error(error.response?.data.message)
+            }
             console.log(error)
         }
     }
@@ -41,8 +46,12 @@ export const UserProvider = ({children}:IChildren) => {
             localStorage.setItem("@Cadastro_clientes: token", data.access)
             const {data: data2} = await api.get("/user/profile/",{headers:{Authorization: `Bearer ${data.access}`}})
             setUser(data2)
+            toast.success(`Bem vindo ${user.username}`)
             navigate("/")
         } catch (error) {
+            if(error instanceof AxiosError) {
+                toast.error(error.response?.data.message)
+            }
             console.log(error)
         }
     }
@@ -51,7 +60,7 @@ export const UserProvider = ({children}:IChildren) => {
         setUser(undefined)
     }
     return(
-        <UserContext.Provider value={ { loginUser, logout, registerUser, user, setUser, navOpen, setNavOpen,formClient, setFormClient } }>
+        <UserContext.Provider value={ { loginUser, logout, registerUser, user, setUser, navOpen, setNavOpen} }>
             {children}
         </UserContext.Provider>
     )

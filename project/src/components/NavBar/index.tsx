@@ -3,9 +3,11 @@ import { Container } from "./style"
 import { UserContext } from "../../contexts/usuario"
 import Button from "../Button"
 import { useNavigate } from "react-router-dom"
+import { ClientContext } from "../../contexts/cliente"
 
 const NavBar = () => {
-    const {user, navOpen, setNavOpen, formClient, setFormClient} = useContext(UserContext);
+    const {user, navOpen, setNavOpen} = useContext(UserContext);
+    const {formClient, setFormClient} = useContext(ClientContext)
     const navigate = useNavigate()
     const navRef = useRef<any>()
     useEffect( () => {

@@ -20,10 +20,9 @@ import NavBar from "../../components/NavBar"
 import { FormClient } from "../../components/FormClient"
 
 const Home = () => {
-    const {clientes, modalIsOpen, clientModal, functions, alterNumber, alterEmail, deleteEmail, deleteNumber, createCliente, setModalIsOpen} = useContext(ClientContext)
-    const { user,  navOpen, setNavOpen, formClient, setFormClient} =useContext(UserContext)
+    const {clientes, modalIsOpen, clientModal, functions, alterNumber, alterEmail, deleteEmail, deleteNumber, setModalIsOpen, formClient, setFormClient} = useContext(ClientContext)
+    const {navOpen, setNavOpen} =useContext(UserContext)
     const {register, handleSubmit, formState: {errors}} = useForm<IFunctions>({resolver: yupResolver(validationFunctions)})
-    const {register: registerClient, handleSubmit: handleSubmitClient, formState: {errors: errorsClient} } = useForm<IAddClient>({resolver: yupResolver(validationCliente)})
     const [value, setValue] = useState<string>()
     const [valueEmail, setValueEmail] = useState<string>()
     return(

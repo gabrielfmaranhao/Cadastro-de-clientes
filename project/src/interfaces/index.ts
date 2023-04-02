@@ -60,6 +60,8 @@ export interface IClienteContextProps {
     setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>
     clientes: ICliente[]
     clientModal: ICliente
+    formClient: boolean 
+    setFormClient: React.Dispatch<React.SetStateAction<boolean>>   
     setClientModal: React.Dispatch<React.SetStateAction<ICliente>>
     functions: (dados: IFunctions) => Promise<void>
     alterNumber: (dados: ITelefoneAdd, id_telefone: string) => Promise<void>
@@ -107,8 +109,6 @@ export interface IUserContextProps {
     setUser: React.Dispatch<React.SetStateAction<IUser | undefined>>
     navOpen: boolean
     setNavOpen: React.Dispatch<React.SetStateAction<boolean>>
-    formClient: boolean
-    setFormClient: React.Dispatch<React.SetStateAction<boolean>>
     
 }
 export interface ICliente {
