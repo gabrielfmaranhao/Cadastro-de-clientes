@@ -1,5 +1,14 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+    width: 100%;
+    height: 100%;
+    animation: 1s animate;
+    @keyframes animate {
+        0%{opacity:0}
+        100%{opacity:1}
+    }
+`
 export const Header = styled.header`
     position: relative;
     display: flex;

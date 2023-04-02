@@ -20,6 +20,11 @@ export const Box = styled.main`
     .image {
         display: none;
     }
+    animation: 1s animateLogin;
+    @keyframes animateLogin {
+        0%{opacity:0; scale:0;}
+        100%{opacity:1; scale:1;}
+    }
     @media screen and (min-width: 630px) {
         flex-direction: row;
         background: linear-gradient(to right , var(--green-1) 50%, var(--white-0) 50%);

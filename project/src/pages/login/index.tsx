@@ -4,7 +4,7 @@ import Fields from "../../components/Fields";
 import Button from "../../components/Button";
 import { GrClose} from "react-icons/gr";
 import ButtonIcon from "../../components/ButtonIcon";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { validationLogin } from "../../validations";
@@ -19,6 +19,7 @@ import { ILogin } from "../../interfaces";
 const Login = () => {
     const { register, handleSubmit, formState:{errors} } =useForm<ILogin>({resolver: yupResolver(validationLogin)})
     const {loginUser} = useContext(UserContext)
+    const navigate = useNavigate()
     return(
         <Container>
             <Box>
@@ -29,7 +30,7 @@ const Login = () => {
                 </div>
                 <Content>
                     <ButtonIcon right={0} top={5}>
-                        <GrClose />
+                        <GrClose onClick={() => navigate("/")}/>
                     </ButtonIcon>
                     <Text description="Cadastro de clientes" color="green-1" size={16} element="h2" weight={400} />
                     <Text description="Login" color="blue-0" size={25} element="h3" weight={700} />

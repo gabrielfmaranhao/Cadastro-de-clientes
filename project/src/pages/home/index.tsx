@@ -1,4 +1,4 @@
-import { Header, ShowCase, Form} from "./style"
+import { Header, ShowCase, Container} from "./style"
 import {AiOutlineMenu} from "react-icons/ai"
 import ButtonIcon from "../../components/ButtonIcon"
 import { useContext, useState } from "react"
@@ -12,10 +12,8 @@ import { GrClose, GrAdd, GrUpdate} from "react-icons/gr";
 import {BsTrash2} from "react-icons/bs";
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { validationCliente, validationFunctions } from "../../validations"
-import Button from "../../components/Button"
-import { useNavigate } from "react-router-dom";
-import { IAddClient, IFunctions } from "../../interfaces"
+import { validationFunctions } from "../../validations"
+import { IFunctions } from "../../interfaces"
 import NavBar from "../../components/NavBar"
 import { FormClient } from "../../components/FormClient"
 
@@ -26,7 +24,7 @@ const Home = () => {
     const [value, setValue] = useState<string>()
     const [valueEmail, setValueEmail] = useState<string>()
     return(
-        <>
+        <Container>
             <Header>
                 <h1>Cadastro de clientes</h1>
                 <ButtonIcon right={10} top={5} onClick={() => setNavOpen(!navOpen)}>
@@ -107,7 +105,7 @@ const Home = () => {
                     <FormClient/>
                 </Modal>
             }
-        </>
+        </Container>
     )
 }
 
